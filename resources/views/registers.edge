@@ -1,0 +1,47 @@
+@layout('layout')
+@set('title', '..:: Registros ::..')
+
+@section('body')
+<section class="row align-items-center p-3">
+
+  <article class="col-sm-12">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Placa</th>
+            <th scope="col">Tipo Vehículo</th>
+            <th scope="col">Fecha Creación</th>
+            <th scope="col">Fecha Cierre</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            @each(register in listRegisters)
+                <tr>
+                    <th scope="row">{{ register.id }}</th>
+                    <td>{{ register.license_plate }}</td>
+                    <td>{{ register.type_vehicle }}</td>
+                    <td>{{ register.created_at }}</td>
+                    <td>{{ register.final_date || '' }}</td>
+                    <td>{{ register.total_payment || '-' }}</td>
+                    <td>
+                        <span class="badge {{ register.state.class }}">{{ register.state.text }}</span>
+                    </td>
+                    <td>
+                        <form action="/update" method="post">
+                            <input type="hidden" name="id_register" value="{{ register.id }}">
+                            <button class="btn btn-primary btn-sm">Finalizar</button>
+                        </form>
+                    </td>
+                </tr>
+            @end
+          
+        </tbody>
+      </table>
+  </article>
+
+</section>
+@end

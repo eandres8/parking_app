@@ -1,0 +1,45 @@
+@layout('layout')
+@set('title', '..:: Registrar Vehículo ::..')
+
+@section('body')
+<section class="row align-items-center p-3">
+
+  <div class="col"></div>
+  <article class="col-sm-6">
+    
+    <div class="card">
+      <div class="card-header">
+        Registrar
+      </div>
+      <div class="card-body">
+        <h6 class="card-subtitle mb-3 text-muted">Registra ingreso vehículo</h6>
+        <form class="row g-3 d-flex align-items-center" action="/register" method="post">
+          <div class="col-md-6">
+            <label for="licensePlate" class="form-label">Placa *</label>
+            <input type="text" class="form-control" id="licensePlate" name="licensePlate" placeholder="AAA000" required>
+          </div>
+          <div class="col-md-6">
+            <label for="cellphone" class="form-label">Celular *</label>
+            <input type="text" class="form-control" id="cellphone" name="cellphone" placeholder="(310) 000 0000">
+          </div>
+          <div class="col-md-6">
+            <label for="typeVehicle" class="form-label">Tipo Vehículo *</label>
+            <select class="form-select" id="typeVehicle" name="typeVehicle">
+              <option selected>Seleccione una opción</option>
+              @each(type in typeVehicleList)
+                <option value={{ type?.key }}>{{ type?.text }}</option>
+              @end
+            </select>
+          </div>
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary mb-3">Ingresar</button>
+            <button type="reset" class="btn btn-default mb-3">Limpiar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </article>
+  <div class="col"></div>
+
+</section>
+@end
